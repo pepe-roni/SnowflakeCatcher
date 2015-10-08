@@ -1,30 +1,73 @@
+Snowflake pepe [] = new Snowflake[100];
+boolean stop=false;
+
 void setup()
 {
-  //your code here
+  noCursor();
+  size(300, 300);
+  
+  for (int i=0; i<pepe.length; i++)
+  {
+    pepe[i]=new Snowflake();
+  }
+}
+void mousePressed()
+{
+  fill(60,90,120);
+  stop=true;
 }
 void draw()
 {
-  //your code here
-}
-void mouseDragged()
-{
-  //your code here
+  background(0);
+  for (int i=0; i<pepe.length; i++)
+  {
+    pepe[i].show();
+    pepe[i].move();
+    pepe[i].wrap();
+    pepe[i].lookDown();
+  }
+  if (stop=true)
+  {
+  fill(90,90,220);
+  rect(mouseX-8,mouseY-1,25,6);
+  stop=false;
+  }
 }
 
 class Snowflake
 {
-  //class member variable declarations
+  int snowpile;
+  float travel, x, y;
+  boolean moving;
   Snowflake()
   {
-    //class member variable initializations
+    travel=(float)(Math.random()*2)+1;
+    x = (int)(Math.random()*300);
+    y=-400;
+    moving=true;
+    snowpile=0;
   }
   void show()
   {
-    //your code here
+    fill(255);
+    noStroke();
+    ellipse(x, y, 10, 10);
+    //snowpile
+    rect(0,299-snowpile,300,500);
   }
   void lookDown()
   {
-    //your code here
+    
+    int dis = (int)(dist(mouseX,mouseY,x,y));
+    if(dis>=-50&& dis<=10)
+    {
+      moving=false;
+    }
+    else
+    {
+      moving=true;
+    }
+    
   }
   void erase()
   {
@@ -32,12 +75,23 @@ class Snowflake
   }
   void move()
   {
-    //your code here
+    if (moving)
+    {
+      y=y+travel;
+    }
+    if (!moving)
+    {
+      
   }
   void wrap()
   {
-    //your code here
+    if (y>310)
+    {
+      y=-190;
+      x = (int)(Math.random()*300);
+      travel=(float)(Math.random()*2)+1;
+      snowpile+=3;
+    }
   }
 }
-
 
