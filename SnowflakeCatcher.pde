@@ -1,11 +1,11 @@
-Snowflake pepe [] = new Snowflake[100];
+Snowflake pepe [] = new Snowflake[200];
 boolean stop=false;
 
 void setup()
 {
   noCursor();
   size(300, 300);
-  
+
   for (int i=0; i<pepe.length; i++)
   {
     pepe[i]=new Snowflake();
@@ -13,7 +13,7 @@ void setup()
 }
 void mousePressed()
 {
-  fill(60,90,120);
+  fill(60, 90, 120);
   stop=true;
 }
 void draw()
@@ -28,9 +28,9 @@ void draw()
   }
   if (stop=true)
   {
-  fill(90,90,220);
-  rect(mouseX-8,mouseY-1,25,6);
-  stop=false;
+    fill(90, 90, 220);
+    rect(mouseX-12, mouseY-6, 25, 6);
+    stop=false;
   }
 }
 
@@ -51,37 +51,33 @@ class Snowflake
   {
     fill(255);
     noStroke();
-    ellipse(x, y, 10, 10);
+    ellipse(x, y, 5, 5);
     //snowpile
-    rect(0,299-snowpile,300,500);
+    rect(0, 299-snowpile, 300, 500);
   }
   void lookDown()
   {
-    
-    int dis = (int)(dist(mouseX,mouseY,x,y));
-    if(dis>=-50&& dis<=10)
+
+    int dis = (int)(dist(mouseX, mouseY, x, y));
+    if (dis>=-50&& dis<=10)
     {
       moving=false;
-    }
-    else
+    } else
     {
       moving=true;
     }
-    
   }
-  void erase()
-  {
-    //your code here
-  }
+
   void move()
   {
     if (moving)
     {
       y=y+travel;
     }
-    if (!moving)
+    if (!stop)
     {
-      
+      y--;
+    }
   }
   void wrap()
   {
